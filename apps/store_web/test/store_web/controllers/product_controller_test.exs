@@ -14,8 +14,9 @@ defmodule StoreWeb.ProductControllerTest do
   test "get list of products", %{conn: conn} do
     product = fixture(conn)
 
-    conn = get(conn, Routes.product_path(conn, :index))
-    |> doc(description: "list all product")
+    conn =
+      get(conn, Routes.product_path(conn, :index))
+      |> doc(description: "list all product")
 
     assert [product] === json_response(conn, 200)["data"]
   end
@@ -31,8 +32,9 @@ defmodule StoreWeb.ProductControllerTest do
     end
 
     test "with invalid data" do
-      conn = post(conn, Routes.product_path(conn, :create), @invalid_attrs)
-      |> doc(description: "a invalid product")
+      conn =
+        post(conn, Routes.product_path(conn, :create), @invalid_attrs)
+        |> doc(description: "a invalid product")
 
       assert json_response(conn, 422)["errors"] != %{}
     end
@@ -42,15 +44,17 @@ defmodule StoreWeb.ProductControllerTest do
     test "that exists", %{conn: conn} do
       product = fixture(conn)
 
-      conn = get(conn, Routes.product_path(conn, :show, product["id"]))
-      |> doc(description: "retrieve a product")
+      conn =
+        get(conn, Routes.product_path(conn, :show, product["id"]))
+        |> doc(description: "retrieve a product")
 
       assert product === json_response(conn, 200)["data"]
     end
 
     test "that doest not exist" do
-      conn = get(conn, Routes.product_path(conn, :show, "016c25fd-70e0-56fe-9d1a-56e80fa20b82"))
-      |> doc(description: "a inexisting product")
+      conn =
+        get(conn, Routes.product_path(conn, :show, "016c25fd-70e0-56fe-9d1a-56e80fa20b82"))
+        |> doc(description: "a inexisting product")
 
       assert json_response(conn, 404)["errors"] != %{}
     end
@@ -61,8 +65,10 @@ defmodule StoreWeb.ProductControllerTest do
       product = fixture(conn)
       attrs = %{name: "Lápis de cor raiz"}
       product = %{product | "name" => attrs.name}
-      conn = put(conn, Routes.product_path(conn, :update, product["id"]), attrs)
-      |> doc(description: "update a product")
+
+      conn =
+        put(conn, Routes.product_path(conn, :update, product["id"]), attrs)
+        |> doc(description: "update a product")
 
       assert product === json_response(conn, 200)["data"]
     end
@@ -79,8 +85,9 @@ defmodule StoreWeb.ProductControllerTest do
   test "delete an product", %{conn: conn} do
     product = fixture(conn)
 
-    conn = delete(conn, Routes.product_path(conn, :delete, product["id"]))
-    |> doc(description: "delete a product")
+    conn =
+      delete(conn, Routes.product_path(conn, :delete, product["id"]))
+      |> doc(description: "delete a product")
 
     assert response(conn, 204)
   end

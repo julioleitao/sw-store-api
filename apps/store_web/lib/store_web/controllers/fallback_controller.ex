@@ -19,7 +19,6 @@ defmodule StoreWeb.FallbackController do
     |> render("errors.json", errors: errors)
   end
 
-
   def call(conn, {:error, :not_found}) do
     conn
     |> put_status(:not_found)

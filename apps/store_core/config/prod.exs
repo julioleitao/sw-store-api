@@ -1,7 +1,7 @@
-# Since configuration is shared in umbrella projects, this file
-# should only configure the :store_core application itself
-# and only for organization purposes. All other config goes to
-# the umbrella root.
 use Mix.Config
 
-import_config "prod.secret.exs"
+config :store_core, StoreCore.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+  ssl: true,
+  url: System.get_env("DATABASE_URL")

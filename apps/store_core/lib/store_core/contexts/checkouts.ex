@@ -4,58 +4,60 @@ defmodule StoreCore.Checkouts do
   alias StoreCore.CheckoutProduct
 
   defp to_checkout_products(products) do
-    products = products
-    |> Enum.map(fn params ->
-      checkout_product =%CheckoutProduct{}
-      |> CheckoutProduct.changeset(params)
+    products =
+      products
+      |> Enum.map(fn params ->
+        checkout_product =
+          %CheckoutProduct{}
+          |> CheckoutProduct.changeset(params)
 
-      if checkout_product.valid?() do
-        CheckoutProduct.apply(checkout_product)
-      else
-        [:errors, checkout_product.errors]
-      end
-    end)
+        if checkout_product.valid?() do
+          CheckoutProduct.apply(checkout_product)
+        else
+          [:errors, checkout_product.errors]
+        end
+      end)
 
-    errors = Enum.filter(products, fn product ->
-      case product do
-        [:errors, errors] -> errors
-        _ -> false
-      end
-    end)
+    errors =
+      Enum.filter(products, fn product ->
+        case product do
+          [:errors, errors] -> errors
+          _ -> false
+        end
+      end)
 
     if length(errors) != 0 do
       {:errors, errors}
     else
-    {:ok, products}
+      {:ok, products}
     end
   end
 
-
   def retrieve_products(products) do
-    products = Enum.map(products, fn checkout_product ->
-      case Products.get(checkout_product.id) do
-        {:ok, product} ->
-          Map.put(checkout_product, :price, product.price)
-        error -> error
-      end
-    end)
+    products =
+      Enum.map(products, fn checkout_product ->
+        case Products.get(checkout_product.id) do
+          {:ok, product} ->
+            Map.put(checkout_product, :price, product.price)
 
-    IO.puts "verifica em caso de erro"
+          error ->
+            error
+        end
+      end)
+
     Enum.filter(products, fn product ->
       case product do
         {:error, reason} -> true
         _ -> false
       end
     end)
-    |> IO.inspect
-
 
     {:ok, products}
   end
 
   def preview(products) do
     with {:ok, products} <- to_checkout_products(products),
-    {:ok, products} <- retrieve_products(products) do
+         {:ok, products} <- retrieve_products(products) do
       total =
         products
         |> Enum.reduce(0, fn product, acc ->

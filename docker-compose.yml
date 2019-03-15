@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  postgres_database:
+    image: postgres:9.6
+    container_name: sw_store_db
+    environment:
+      - POSTGRES_DB=sw_store_db
+      - POSTGRES_USER=sw_store_usr
+      - POSTGRES_PASSWORD=sw_store_pwd
+      - TZ=GMT
+    volumes:
+      - ./.local_db/postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432

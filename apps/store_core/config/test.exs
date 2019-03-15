@@ -6,8 +6,7 @@ use Mix.Config
 
 # Configure your database
 config :store_core, StoreCore.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "store_core_test",
-  hostname: "localhost",
+  url:
+    System.get_env("DATABASE_URL") ||
+      "postgresql://sw_store_usr:sw_store_pwd@localhost/sw_store_test",
   pool: Ecto.Adapters.SQL.Sandbox

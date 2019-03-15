@@ -61,7 +61,7 @@ defmodule StoreCore.CheckoutsTest do
         [%{name: "Lápis", price: 200, quantity: 3, promotion_id: tres_por_10()}]
         |> checkout_total
 
-      assert total === 10
+      assert total === 1000
     end
 
     test "with two groups" do
@@ -69,7 +69,7 @@ defmodule StoreCore.CheckoutsTest do
         [%{name: "Lápis", price: 200, quantity: 6, promotion_id: tres_por_10()}]
         |> checkout_total
 
-      assert total === 20
+      assert total === 2000
     end
 
     test "with two groups and one out from promotion" do
@@ -77,29 +77,23 @@ defmodule StoreCore.CheckoutsTest do
         [%{name: "Lápis", price: 200, quantity: 7, promotion_id: tres_por_10()}]
         |> checkout_total
 
-      assert total === 220
+      assert total === 2200
     end
   end
 
   test "a mixed checkout" do
     total =
       [
-        # 700
         %{name: "Ponta de lápis", price: 100, quantity: 7},
-        # 30
         %{name: "Caixa de lápis", price: 650, quantity: 9, promotion_id: tres_por_10()},
-        # 300
         %{name: "Borracha", price: 75, quantity: 7, promotion_id: pague_1_leve_2()},
-        # 320
         %{name: "Pasta colegial", price: 300, quantity: 7, promotion_id: tres_por_10()},
-        # 200
         %{name: "Caneta", price: 100, quantity: 3, promotion_id: pague_1_leve_2()},
-        # 1400
         %{name: "Lápis", price: 200, quantity: 7}
       ]
       |> checkout_total
 
-    assert total === 700 + 30 + 300 + 320 + 200 + 1400
+    assert total === 7900
   end
 
   defp tres_por_10, do: Promotions.filter_by_name("3 por 10 reais").id

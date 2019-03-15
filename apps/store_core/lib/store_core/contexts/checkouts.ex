@@ -89,6 +89,6 @@ defmodule StoreCore.Checkouts do
   def descount_from(%{price: price, quantity: quantity}, "3 por 10 reais") do
     numberOfProductsNotIncluded = rem(quantity, 3)
     quantity = div(quantity - numberOfProductsNotIncluded, 3)
-    10 * quantity + numberOfProductsNotIncluded * price
+    1000 * quantity + numberOfProductsNotIncluded * price
   end
 end

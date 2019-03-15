@@ -17,7 +17,7 @@ defmodule StoreCore.CheckoutsTest do
         Map.put(product, :id, created_product.id)
       end)
 
-    assert [total: 300, products: ^products] = Checkouts.preview(products)
+    assert {:ok, [total: 300, products: products]} = Checkouts.preview(products)
   end
 
   describe "calculate Pague 1 Leve 2 with" do
@@ -107,7 +107,7 @@ defmodule StoreCore.CheckoutsTest do
   defp pague_1_leve_2, do: Promotions.filter_by_name("Pague 1 Leve 2").id
 
   defp checkout_total(products) do
-    [total: total, products: _] =
+    {:ok, [total: total, products: _]} =
       products
       |> Enum.map(fn product ->
         {:ok, created_product} = Products.create(product)

@@ -40,5 +40,7 @@ defmodule StoreWeb.Endpoint do
     key: "_store_web_key",
     signing_salt: "uST/qb6j"
 
+  plug CORSPlug
+
   plug StoreWeb.Router
 end

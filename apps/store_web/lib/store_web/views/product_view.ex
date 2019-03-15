@@ -15,7 +15,8 @@ defmodule StoreWeb.ProductView do
     %{
       id: product.id,
       name: product.name,
-      price: product.price
+      price: product.price,
+      promotion_id: product.promotion_id
     }
   end
 end

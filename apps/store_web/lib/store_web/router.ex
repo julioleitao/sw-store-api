@@ -10,5 +10,6 @@ defmodule StoreWeb.Router do
 
     resources "/products", ProductController, only: [:index, :create, :show, :update, :delete]
     get "/promotions", PromotionController, :index
+    post "/checkout", CheckoutController, :create
   end
 end

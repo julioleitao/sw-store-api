@@ -12,6 +12,14 @@ defmodule StoreWeb.FallbackController do
     |> render("error.json", changeset: changeset)
   end
 
+  def call(conn, {:errors, errors}) do
+    conn
+    |> put_status(:unprocessable_entity)
+    |> put_view(StoreWeb.ChangesetView)
+    |> render("errors.json", errors: errors)
+  end
+
+
   def call(conn, {:error, :not_found}) do
     conn
     |> put_status(:not_found)

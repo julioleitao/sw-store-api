@@ -9,5 +9,6 @@ defmodule StoreWeb.Router do
     pipe_through :api
 
     resources "/products", ProductController, only: [:index, :create, :show, :update, :delete]
+    get "/promotions", PromotionController, :index
   end
 end

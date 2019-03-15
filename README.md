@@ -38,3 +38,8 @@ Cada aplicação é composta por diferentes camadas com responsabilidade distint
 * lib/store_web/views: provê a camada view de cada recurso. 
 * lib/store_wb/router.ex: declara as rotas da API. Encapsula validações e parsers dos dados da API. 
 * lib/store_web/channels: comuicação via websocket. Não é utilizado no momento.
+
+
+## Documentação da API REST
+
+Ver em [apps/store_web/docs/api.md](https://github.com/julioleitao/sw_store_api/blob/master/apps/store_web/docs/api.md)

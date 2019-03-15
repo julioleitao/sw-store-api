@@ -17,6 +17,7 @@ config :store_web, StoreWeb.Endpoint,
 
 # Use Jason for JSON parsing
 config :phoenix, :json_library, Jason
+config :bureaucrat, :json_library, Jason
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

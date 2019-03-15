@@ -43,6 +43,7 @@ defmodule StoreWeb.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:cors_plug, "~> 2.0"},
+      {:bureaucrat, "~> 0.2.5", only: :test},
       {:store_core, in_umbrella: true}
     ]
   end

@@ -21,6 +21,8 @@ defmodule StoreWeb.ConnCase do
       use Phoenix.ConnTest
       alias StoreWeb.Router.Helpers, as: Routes
 
+      import Bureaucrat.Helpers
+
       # The default endpoint for testing
       @endpoint StoreWeb.Endpoint
     end

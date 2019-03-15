@@ -15,6 +15,9 @@ config :store_web, StoreWeb.Endpoint,
   render_errors: [view: StoreWeb.ErrorView, accepts: ~w(json)],
   pubsub: [name: StoreWeb.PubSub, adapter: Phoenix.PubSub.PG2]
 
+# Use Jason for JSON parsing
+config :phoenix, :json_library, Jason
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

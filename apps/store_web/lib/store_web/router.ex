@@ -7,5 +7,7 @@ defmodule StoreWeb.Router do
 
   scope "/api", StoreWeb do
     pipe_through :api
+
+    resources "/product", ProductController, only: [:create, :show, :update, :delete]
   end
 end

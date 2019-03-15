@@ -16,6 +16,14 @@ defmodule StoreCore.ProductsTest do
     price: nil
   }
 
+  test "list a Product" do
+    assert [] = Products.list()
+
+    product = fixture()
+
+    assert [product] = Products.list()
+  end
+
   test "create a Product" do
     assert %{id: id} = fixture()
   end

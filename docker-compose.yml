@@ -5,7 +5,7 @@ services:
     image: postgres:9.6
     container_name: sw_store_db
     environment:
-      - POSTGRES_DB=sw_store_db
+      - POSTGRES_DB=sw_store
       - POSTGRES_USER=sw_store_usr
       - POSTGRES_PASSWORD=sw_store_pwd
       - TZ=GMT
@@ -13,3 +13,16 @@ services:
       - ./.local_db/postgres:/var/lib/postgresql/data
     ports:
       - 5432:5432
+
+  app_server:
+    build: .
+    container_name: api_server
+    environment:
+      - DATABASE_URL=postgresql://sw_store_usr:sw_store_pwd@sw_store_db/sw_store?pool_size=10
+    command: mix phx.server
+    volumes: 
+      - $PWD:/usr/src/app
+    ports: 
+      - 8080:4000
+    depends_on:
+      - postgres_database

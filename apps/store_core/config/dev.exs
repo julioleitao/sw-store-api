@@ -8,4 +8,4 @@ use Mix.Config
 config :store_core, StoreCore.Repo,
   url:
     System.get_env("DATABASE_URL") ||
-      "postgresql://sw_store_usr:sw_store_pwd@localhost/sw_store_db?pool_size=10"
+      "postgresql://sw_store_usr:sw_store_pwd@localhost/sw_store?pool_size=10"

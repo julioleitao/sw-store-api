@@ -11,6 +11,14 @@ defmodule StoreWeb.ProductControllerTest do
     price: nil
   }
 
+  test "get list of products", %{conn: conn} do
+    product = fixture(conn)
+
+    conn = get(conn, Routes.product_path(conn, :index))
+
+    assert [product] === json_response(conn, 200)["data"]
+  end
+
   describe "post an product " do
     test "with valid data", %{conn: conn} do
       conn =

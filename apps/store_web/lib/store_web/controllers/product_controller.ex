@@ -5,6 +5,11 @@ defmodule StoreWeb.ProductController do
 
   action_fallback StoreWeb.FallbackController
 
+  def index(conn, _) do
+    conn
+    |> render("index.json", products: Products.list())
+  end
+
   def create(conn, attrs) do
     with {:ok, product} <- Products.create(attrs) do
       conn
@@ -22,7 +27,7 @@ defmodule StoreWeb.ProductController do
   def update(conn, %{"id" => id} = params) do
     with {:ok, product} <- Products.get(id),
          {:ok, product} <- Products.update(product, params) do
-      render(conn, "show.json",product: product)
+      render(conn, "show.json", product: product)
     end
   end
 

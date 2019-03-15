@@ -5,10 +5,12 @@ defmodule StoreCore.Products do
   """
   alias StoreCore.{Product, Repo}
 
+  def list, do: Repo.all(Product)
+
   def create(params) do
     %Product{}
     |> Product.changeset(params)
-    |> Repo.insert
+    |> Repo.insert()
   end
 
   def get(id) do
@@ -21,7 +23,7 @@ defmodule StoreCore.Products do
   def update(product, params) do
     product
     |> Product.changeset(params)
-    |> Repo.update
+    |> Repo.update()
   end
 
   def delete(product), do: Repo.delete(product)
